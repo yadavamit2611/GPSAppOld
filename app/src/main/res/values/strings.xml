@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NAVBYTE</string>
+    <string name="welcome_to_navbyte">Welcome to NavByte</string>
+    <string name="developed_by_macs">Developed by MACS</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="need_an_account_sign_in">Need an account? Sign Up</string>
+    <string name="password">password</string>
+    <string name="email">Email</string>
+    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="sign_upx">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="username">username</string>
+</resources>
