@@ -20,6 +20,15 @@ public class MyApplication extends Application {
     }
 
     private List<Location> myLocations;
+    private Location startLocation;
+
+    public Location getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(Location startLocation) {
+        this.startLocation = startLocation;
+    }
 
     public MyApplication getInstance(){
 

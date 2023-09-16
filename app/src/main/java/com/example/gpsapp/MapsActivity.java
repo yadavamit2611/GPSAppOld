@@ -3,6 +3,7 @@ package com.example.gpsapp;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -15,7 +16,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.gpsapp.databinding.ActivityMapsBinding;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.StyleSpan;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -57,15 +62,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      //   mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
       //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             LatLng lastLocationPlaced = sydney;
+            List<LatLng> listLatLng = new ArrayList<LatLng>();
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        Location startLocation = myApplication.getStartLocation();
+        lastLocationPlaced = new LatLng(startLocation.getLatitude(),startLocation.getLongitude());
 
+        mMap.addMarker(new MarkerOptions().position(new LatLng(startLocation.getLatitude(),startLocation.getLongitude())));
         for(Location location : savedLocations){
             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-            MarkerOptions markerOptions = new MarkerOptions();
+           /* MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
             markerOptions.title("Lat:"+location.getLatitude()+" Lon:"+location.getLongitude());
             mMap.addMarker(markerOptions);
-            lastLocationPlaced = latLng;
+            lastLocationPlaced = latLng;*/
+            listLatLng.add(latLng);
+
+            //mMap.addPolyline(new PolylineOptions().clickable(true).add(latLng));
         }
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions=polylineOptions.color(Color.GREEN);
+    //    polylineOptions.addSpan(new StyleSpan(0,2));
+        polylineOptions=  polylineOptions.addAll(listLatLng);
+        polylineOptions=  polylineOptions.clickable(true);
+        polylineOptions=polylineOptions.width(5);
+        mMap.addPolyline(polylineOptions);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLocationPlaced,12.0f));
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override

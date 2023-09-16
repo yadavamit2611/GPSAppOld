@@ -87,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 //get grp location
 
                 //add the new location to the global list
-                MyApplication myApplication = (MyApplication)getApplicationContext();
-                savedLocations = myApplication.getMyLocations();
-                savedLocations.add(currentLocation);
+                //MyApplication myApplication = (MyApplication)getApplicationContext();
+                //savedLocations = myApplication.getMyLocations();
+              //  savedLocations.add(currentLocation);
             }
         });
 
@@ -211,6 +211,12 @@ public class MainActivity extends AppCompatActivity {
 
                     updateUIValues(location);
                     currentLocation = location;
+                    MyApplication myApplication = (MyApplication)getApplicationContext();
+                    if(myApplication.getStartLocation()==null){
+                        myApplication.setStartLocation(location);
+                    }
+                    savedLocations = myApplication.getMyLocations();
+                    savedLocations.add(currentLocation);
                 }
 
             });
